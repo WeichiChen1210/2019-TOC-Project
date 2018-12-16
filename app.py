@@ -1,38 +1,75 @@
+# -*- coding: utf-8 -*-
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 from bottle import route, run, request, abort, static_file
 
 from fsm import TocMachine
 
-
 VERIFY_TOKEN = "876546587565122"
+
 machine = TocMachine(
     states=[
-        'user',
-        'state1',
-        'state2'
+        'usr',
+        'menu',
+        'signup_info',
+        'introduction',
+        'download',
+        'traffic'
     ],
     transitions=[
         {
             'trigger': 'advance',
-            'source': 'user',
-            'dest': 'state1',
-            'conditions': 'is_going_to_state1'
+            'source': 'usr',
+            'dest': 'menu',
+            'conditions': 'is_going_to_menu'
         },
         {
             'trigger': 'advance',
-            'source': 'user',
-            'dest': 'state2',
-            'conditions': 'is_going_to_state2'
+            'source': 'menu',
+            'dest': 'signup_info',
+            'conditions': 'is_going_to_signup_info'
         },
+        {
+            'trigger': 'advance',
+            'source': 'menu',
+            'dest': 'introduction',
+            'conditions': 'is_going_to_introduction'
+        },
+        {
+            'trigger': 'advance',
+            'source': 'menu',
+            'dest': 'download',
+            'conditions': 'is_going_to_download'
+        },
+        {
+            'trigger': 'advance',
+            'source': [
+                'signup_info',
+                'introduction',
+                'download',
+            ],
+            'dest': 'menu',
+            'conditions': 'back_to_menu'
+        },
+        # {
+        #     'trigger': 'advance',
+        #     'source': 'menu',
+        #     'dest': 'traffic',
+        #     'conditions': 'is_going_to_traffic'
+        # },
         {
             'trigger': 'go_back',
             'source': [
-                'state1',
-                'state2'
+                'signup_info',
+                'introduction',
+                'download',
+                'traffic'
             ],
-            'dest': 'user'
+            'dest': 'menu'
         }
     ],
-    initial='user',
+    initial='usr',
     auto_transitions=False,
     show_conditions=True,
 )
@@ -62,6 +99,7 @@ def webhook_handler():
     if body['object'] == "page":
         #print("here")
         event = body['entry'][0]['messaging'][0]
+        #   print(event)
         machine.advance(event)
         return 'OK'
 
