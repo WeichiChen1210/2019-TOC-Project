@@ -1,12 +1,14 @@
-# -*- coding: utf-8 -*-
+import os
+PORT = os.environ['PORT']
+run(host="0.0.0.0", port=PORT, debug=True, reloader=True)
+VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
+
 import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
 from bottle import route, run, request, abort, static_file
 
 from fsm import TocMachine
 
-VERIFY_TOKEN = "876546587565122"
+
 
 machine = TocMachine(
     states=[
@@ -15,6 +17,14 @@ machine = TocMachine(
         'signup_info',
         'introduction',
         'download',
+        'calendar',
+        'contact',
+        'question',
+        'inform',
+        'leave',
+        'step',
+        'money',
+        'email',
         'traffic'
     ],
     transitions=[
@@ -44,13 +54,76 @@ machine = TocMachine(
         },
         {
             'trigger': 'advance',
+            'source': 'menu',
+            'dest': 'calendar',
+            'conditions': 'is_going_to_calendar'
+        },
+        {
+            'trigger': 'advance',
+            'source': 'menu',
+            'dest': 'contact',
+            'conditions': 'is_going_to_contact'
+        },
+        {
+            'trigger': 'advance',
+            'source': 'menu',
+            'dest': 'question',
+            'conditions': 'is_going_to_question'
+        },
+        {
+            'trigger': 'advance',
+            'source': 'download',
+            'dest': 'inform',
+            'conditions': 'is_going_to_inform'
+        },
+        {
+            'trigger': 'advance',
+            'source': 'download',
+            'dest': 'leave',
+            'conditions': 'is_going_to_leave'
+        },
+        {
+            'trigger': 'advance',
+            'source': 'signup_info',
+            'dest': 'step',
+            'conditions': 'is_going_to_step'
+        },
+        {
+            'trigger': 'advance',
+            'source': 'step',
+            'dest': 'money',
+            'conditions': 'is_going_to_money'
+        },
+        {
+            'trigger': 'advance',
+            'source': 'money',
+            'dest': 'email',
+            'conditions': 'is_going_to_email'
+        },
+        {
+            'trigger': 'advance',
             'source': [
                 'signup_info',
                 'introduction',
                 'download',
+                'calendar',
+                'question',
+                'contact',
+                'step',
+                'money',
+                'email'
             ],
             'dest': 'menu',
             'conditions': 'back_to_menu'
+        },
+        {
+            'trigger': 'advance',
+            'source': [
+                'leave',
+                'inform'
+            ],
+            'dest': 'download',
+            'conditions': 'back_to_download'
         },
         # {
         #     'trigger': 'advance',
@@ -64,7 +137,8 @@ machine = TocMachine(
                 'signup_info',
                 'introduction',
                 'download',
-                'traffic'
+                'calendar',
+                'contact'
             ],
             'dest': 'menu'
         }
