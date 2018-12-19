@@ -213,7 +213,7 @@ class TocMachine(GraphMachine):
                 "payload":"other"
             }
         ]
-        #send_img_message(sender_id, "https://i.imgur.com/lG6fUoB.jpg")
+        send_img_message(sender_id, "https://i.imgur.com/TvjzlFP.png")
         send_button_message(sender_id, "這裡是2019成大資工營，歡迎使用聊天機器人！\n如果想知道報名相關的資訊，請輸入「報名資訊」。\n想知道更多我們的活動內容，請輸入「營隊介紹」。\n想要下載相關的檔案附件，請輸入「附件下載」。\n或是點選按鈕進入其他功能～", button)
         #self.go_back()
 
@@ -336,7 +336,7 @@ class TocMachine(GraphMachine):
         send_button_message(sender_id, "離營切結書：\nhttps://docs.google.com/document/d/1lUYx301-YGoZgzdM04mwEsAUyJL3tglnMVZr0B7mspg/edit", button)
     
     def on_enter_step(self, event):
-        print("I'm entering 其他問題")
+        print("I'm entering 填報名表")
         button = [
             {
                 "type":"postback",
@@ -353,7 +353,7 @@ class TocMachine(GraphMachine):
         send_button_message(sender_id, "***報名步驟***\n報名日期：\n4/1~4/24\t\t第一階段報名\n4/24~5/14\t第二階段報名\n1. 請至以下網址填寫報名表單：\nhttps://www.surveycake.com/s/24nrA \n報名完成後，請靜待我們公佈錄取名單。\n若確定您錄取了，請在期限內進行匯款。", button)
 
     def on_enter_money(self, event):
-        print("I'm entering 其他問題")
+        print("I'm entering 匯款")
         button = [
             {
                 "type":"postback",
@@ -370,7 +370,7 @@ class TocMachine(GraphMachine):
         send_button_message(sender_id, "2. 匯款：\n匯款期限：\n5/8\t第一階段匯款截止\n5/30\t第二階段匯款截止\n郵局代號：700\n存簿帳號：0123456789123\n戶名：國立成功大學資訊營歐子毓\n郵局：台南成功大學郵局\n金額：個人報名5300\n兩人團報5100/人\n三人團報5000/人\n*轉帳完請務必妥善留存轉帳明細\n*請務必確認轉帳帳號與金額，若因個人疏失造成匯款失敗，本營隊概不負責，敬請見諒", button)
     
     def on_enter_email(self, event):
-        print("I'm entering 其他問題")
+        print("I'm entering 寄信")
         button = [
             {
                 "type":"postback",
@@ -402,6 +402,9 @@ class TocMachine(GraphMachine):
 
     def on_exit_leave(self, event):
         print('Leaving 離營')
+
+    def on_exit_money(self, event):
+        print('Leaving 填報名表')
 
     def on_exit_money(self, event):
         print('Leaving 匯款')
