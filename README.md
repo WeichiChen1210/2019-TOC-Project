@@ -25,7 +25,7 @@ This messenger bot is used to answer some easy questions and provide information
 I will introduce my bot through the states, referenced to the picture above.
 
 * Initial state:
-The initial state is set to `user`, input "hi" or "Hi" to enter the actual initial state `menu`. There are 6 states that can be reached from the `menu` state:
+	The initial state is set to `user`, input "hi" or "Hi" to enter the actual initial state `menu`. There are 6 states that can be reached from the `menu` state:
 	+ 報名資訊(signup_info)
 	+ 營隊介紹(introduction)
 	+ 附件下載(download)
@@ -33,35 +33,35 @@ The initial state is set to `user`, input "hi" or "Hi" to enter the actual initi
 	+ 聯絡方式(contact)
 	+ 其他問題(question)
 
-Every state has a "返回主目錄(return)" button which allows users to go back to `menu` state.
+	Every state has a "返回主目錄(return)" button which allows users to go back to `menu` state.
 
 * 報名資訊(signup_info):
 
-This state shows the "information" and the "steps" of signing-up.
+	This state shows the "information" and the "steps" of signing-up.
 
-There are totally 3 steps for signing-up, so there are 3 states after the sign_up state. The 3 steps are in order and each can reached by its previous state.
+	There are totally 3 steps for signing-up, so there are 3 states after the sign_up state. The 3 steps are in order and each can reached by its previous state.
 
-Of course, return buttons are provided under the states.
+	Of course, return buttons are provided under the states.
 
 * 營隊介紹(introduction):
 
-This state shows the introduction of this camp, and there is a button below that is a link to the website of our CSIE.
+	This state shows the introduction of this camp, and there is a button below that is a link to the website of our CSIE.
 
 * 附件下載（download)
 
-This state has 2 following states that are different files to be downloaded. And I use 2 quick_reply button to show them.
+	This state has 2 following states that are different files to be downloaded. And I use 2 quick_reply button to show them.
 
 * 行事曆(calender)
 
-This state shows the schedule of the camp.
+	This state shows the schedule of the camp.
 
 * 聯絡方式(contact)
 
-This state shows the contact information of the camp.
+	This state shows the contact information of the camp.
 
 * 其他問題(question)
 
-This state is left for the user to type questions that will be read by the fanpage manager.
+	This state is left for the user to type questions that will be read by the fanpage manager.
 
 
 
