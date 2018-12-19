@@ -1,50 +1,24 @@
 # TOC Project 2019
 
-Template Code for TOC Project 2019
-
 A Facebook messenger bot based on a finite state machine
 
-More details in the [Slides](https://hackmd.io/p/SkpBR-Yam#/)
+Name：陳韋志
+
+Student ID: F74052269
 
 ## Setup
 
-### Prerequisite
-* Python 3
-* Facebook Page and App
-* HTTPS Server
+Use the setup and template code from TA
 
-#### Install Dependency
-```sh
-pip install -r requirements.txt
-```
+This bot has been deployed(bonus) on Heroku, you can go to this [fanpage](https://www.facebook.com/2018%E8%B3%87%E5%B7%A5%E7%87%9F-360855851156668/) to use the chat bot.
 
-* pygraphviz (For visualizing Finite State Machine)
-    * [Setup pygraphviz on Ubuntu](http://www.jianshu.com/p/a3da7ecc5303)
-
-#### Secret Data
-
-`VERIFY_TOKEN` and `ACCESS_TOKEN` **MUST** be set to proper values.
-Otherwise, you might not be able to run your code.
-
-#### Run Locally
-You can either setup https server or using `ngrok` as a proxy.
-
-**`ngrok` would be used in the following instruction**
-
-```sh
-./ngrok http 5000
-```
-
-After that, `ngrok` would generate a https URL.
-
-#### Run the sever
-
-```sh
-python3 app.py
-```
+If you want to run locally, you need to write in the tokens and run `ngrok` with `app.py`.
 
 ## Finite State Machine
-![fsm](./img/show-fsm.png)
+![fsm](./fsm.png)
+
+## Usage
+The initial state is set to `user`, input "hi" or "Hi" to enter the actual initial state `menu`.
 
 ## Usage
 The initial state is set to `user`.
