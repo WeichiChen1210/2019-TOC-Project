@@ -1,14 +1,10 @@
 import os
 PORT = os.environ['PORT']
-run(host="0.0.0.0", port=PORT, debug=True, reloader=True)
 VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
-
 import sys
 from bottle import route, run, request, abort, static_file
 
 from fsm import TocMachine
-
-
 
 machine = TocMachine(
     states=[
@@ -25,7 +21,6 @@ machine = TocMachine(
         'step',
         'money',
         'email',
-        'traffic'
     ],
     transitions=[
         {
@@ -125,12 +120,6 @@ machine = TocMachine(
             'dest': 'download',
             'conditions': 'back_to_download'
         },
-        # {
-        #     'trigger': 'advance',
-        #     'source': 'menu',
-        #     'dest': 'traffic',
-        #     'conditions': 'is_going_to_traffic'
-        # },
         {
             'trigger': 'go_back',
             'source': [
@@ -185,4 +174,4 @@ def show_fsm():
 
 
 if __name__ == "__main__":
-    run(host="localhost", port=5000, debug=True, reloader=True)
+    run(host="0.0.0.0", port=PORT, debug=True, reloader=True)

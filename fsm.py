@@ -25,7 +25,7 @@ class TocMachine(GraphMachine):
         if event.get("message"):
             if event["message"].get("text"):
                 text = event['message']['text']
-            return text == 'hi'
+            return text == 'hi' or text == 'Hi'
         else: return False
 
     def is_going_to_signup_info(self, event):
@@ -37,7 +37,7 @@ class TocMachine(GraphMachine):
         elif event.get("message"):
             if event["message"].get("text"):
                 text = event['message']['text']
-            return text == '報名資訊'
+            return text == '報名資訊' or text == '報名'
         else: return False
 
     def is_going_to_introduction(self, event):
@@ -49,7 +49,7 @@ class TocMachine(GraphMachine):
         elif event.get("message"):
             if event["message"].get("text"):
                 text = event['message']['text']
-            return text == '營隊介紹'
+            return text == '營隊介紹' or text == '介紹'
         else: return False
 
     def is_going_to_download(self, event):
@@ -61,7 +61,7 @@ class TocMachine(GraphMachine):
         elif event.get("message"):
             if event["message"].get("text"):
                 text = event['message']['text']
-            return text == '附件下載'
+            return text == '附件下載' or text == '下載'
         else: return False
 
     def is_going_to_calendar(self, event):
@@ -109,7 +109,7 @@ class TocMachine(GraphMachine):
                 return text == 'inform'
             elif event["message"].get("text"):
                 text = event['message']['text']
-                return text == '營前通知'
+                return text == '營前通知' or text == '通知'
         else: return False
     
     def is_going_to_leave(self, event):
@@ -121,7 +121,7 @@ class TocMachine(GraphMachine):
                 return text == 'leave'
             elif event["message"].get("text"):
                 text = event['message']['text']
-                return text == '離營切結書'
+                return text == '離營切結書' or text == '切結書'
         else: return False
 
     def is_going_to_step(self, event):
@@ -184,14 +184,6 @@ class TocMachine(GraphMachine):
             return text == '返回下載'
         else: return False
             
-    # def is_going_to_traffic(self, event):
-    #     if event.get("message"):
-    #         if event["message"].get("text"):
-    #             text = event['message']['text']
-    #         #print(text)
-    #         return text.decode('utf-8') == '交通方式'.decode('utf-8')
-    #     return False
-
 ################# on entert #################
 
     def on_enter_menu(self, event):
@@ -317,7 +309,7 @@ class TocMachine(GraphMachine):
             }
         ]
         sender_id = event['sender']['id']
-        send_button_message(sender_id, "其他問題", button)
+        send_button_message(sender_id, "如果有其他的問題，請在這裡發問，我們會盡快回覆您。", button)
 
     def on_enter_inform(self, event):
         print("I'm entering 營前通知")
@@ -389,12 +381,6 @@ class TocMachine(GraphMachine):
         sender_id = event['sender']['id']
         send_button_message(sender_id, "3. 寄信\n請完成匯款的同學務必要依照下列格式寄信到我們的信箱，以便核對資料。\n***如果沒有寄信造成我們無法核對資料，也視同放棄錄取***\n收件人：2018nckucsiecamp@gmail.com\n主旨：小隊員姓名-就讀學校-聯絡電話\n(e.g 金城武-建國中學-0900123456)\n信件內容：\n*匯款人姓名\n*繳費日期\n*帳戶銀行/郵局代碼\n*帳號末五碼\n當我們確認繳費資料無誤之後會回信通知，敬請留意自己的信箱\n另外如果完成繳費之後因個人因素無法參加營隊，我們會在Email裡面釋出相關規定，再請需要退費者留意自己報名時填的信箱", button)
 
-    # def on_enter_traffic(self, event):
-    #     print("I'm entering 交通方式")
-
-    #     sender_id = event['sender']['id']
-    #     send_text_message(sender_id, "交通方式")
-    #     self.go_back(event)
 ################# on exit #################
     def on_exit_signup_info(self, event):
         print('Leaving 報名資訊')
@@ -423,5 +409,3 @@ class TocMachine(GraphMachine):
     def on_exit_money(self, event):
         print('Leaving 寄信')
 
-    # def on_exit_traffic(self, event):
-    #     print('Leaving 交通方式')
